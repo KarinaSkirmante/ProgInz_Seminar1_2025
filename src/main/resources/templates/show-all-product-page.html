@@ -1,0 +1,26 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	
+
+<body>
+	
+	<p>Informācija par produktiem: </p>
+	
+	<table th:each = "temp : ${package}">
+		<tr>
+			<td th:text="${temp.getId()}" ></td>
+			<td th:text="${temp.getTitle()}" ></td>
+			<td th:text="${temp.getDescription()}" ></td>
+			<td th:text="${temp.getPrice()}" ></td>
+			<td th:text="${temp.getQuantity()}" ></td>
+			
+		</tr>
+		
+		
+	</table>
+	
+	
+</body>
+</html>
+
+
+
