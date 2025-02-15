@@ -17,7 +17,7 @@ public class Product {
 	private String title;
 	private String description;
 	private float price;
-	private int quantiy;
+	private int quantity;
 	
 	@Setter(value = AccessLevel.NONE)
 	@Getter(value = AccessLevel.NONE)
@@ -34,6 +34,6 @@ public class Product {
 		setTitle(inputTitle);
 		setDescription(inputDescription);
 		setPrice(inputPrice);
-		setQuantiy(inputQuantity);
+		setQuantity(inputQuantity);
 	}
 }
