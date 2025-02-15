@@ -5,7 +5,7 @@ import java.util.Random;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
+//kontrolieru klase
 @Controller
 public class MyFirstController {
 	
