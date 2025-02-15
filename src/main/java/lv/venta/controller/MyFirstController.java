@@ -5,6 +5,8 @@ import java.util.Random;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import lv.venta.model.Product;
 //kontrolieru klase
 @Controller
 public class MyFirstController {
@@ -29,10 +31,23 @@ public class MyFirstController {
 		model.addAttribute("package", data);
 		return "data-page";//parādīs data-page.html
 	}
-	//TODO izveidot model pakotni
-	//TODO izveidot model pakotnē Product klasi, 
-	//kas ietver int id, float price, String title, String description, 
-	//int quantiy
+	//TODO izveidot jaunu kontroliera funkciju un kurā
+	//1. izveidot testa produkta objektu
+	//2. padot to caur paciņu html lapa
+	//izveidot atbilstosu html lapu
+	
+	@GetMapping("/getproduct") //localhost:8080/getproduct
+	public String getControllerGetProduct(Model model) {
+		
+		Product testProduct = new Product("Tomāts", "Garšīgs", 0.99f, 5);
+		
+		model.addAttribute("package", testProduct);	
+		return "show-one-product-page"; //parādīs show-one-product-page.html
+		
+		
+	}
+	
+	
 	
 
 }
