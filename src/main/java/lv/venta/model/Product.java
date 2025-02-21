@@ -43,7 +43,6 @@ public class Product {
 	
 	public Product(String inputTitle, String inputDescription, float inputPrice, int inputQuantity)
 	{
-		setId();
 		setTitle(inputTitle);
 		setDescription(inputDescription);
 		setPrice(inputPrice);
