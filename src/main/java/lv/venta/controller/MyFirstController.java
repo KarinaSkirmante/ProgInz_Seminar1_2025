@@ -62,6 +62,6 @@ public class MyFirstController {
 		return "show-all-product-page";//parādīs show-all-product-page.html
 	}
 	
-	
-
 }
+
+
