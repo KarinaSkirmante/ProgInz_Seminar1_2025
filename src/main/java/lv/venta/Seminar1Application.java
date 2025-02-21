@@ -29,6 +29,13 @@ public class Seminar1Application {
 				prodRepo.save(pr2);
 				prodRepo.save(pr3);
 				
+				//TODO
+				//izņemt datus
+				//rediget datus
+				//dabut visus datus no tabulas
+				//dabut tikai vienu ierakstu,ja ir zinams id
+				
+				
 				
 			}
 		};
