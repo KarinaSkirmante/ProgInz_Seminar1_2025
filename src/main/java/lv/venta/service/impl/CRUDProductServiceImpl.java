@@ -58,7 +58,21 @@ public class CRUDProductServiceImpl implements ICRUDProductService{
 
 	@Override
 	public void deleteById(int id) throws Exception {
-		// TODO Auto-generated method stub
+		if(id < 0)
+		{
+			throw new Exception("Id nevar būt negatīvs");
+		}
+		
+		if(!prodRepo.existsById(id))
+		{
+			throw new Exception("Produkts ar tādu id neeksistē");
+		}
+		
+		//īsais pieraksts
+		prodRepo.deleteById(id);
+		//garais pieraksts
+		//Product retrievedProduct = prodRepo.findById(id).get();
+		//prodRepo.delete(retrievedProduct);
 		
 	}
 
