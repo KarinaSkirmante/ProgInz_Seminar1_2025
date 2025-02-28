@@ -9,7 +9,7 @@ public interface ICRUDProductService {
 	//CRUD - create, retrieve, update, delete
 	
 	//C - create
-	public abstract void create(String title, String description,float price, int quantity);
+	public abstract void create(String title, String description,float price, int quantity) throws Exception;
 
 	//R - retrieve all
 	public abstract ArrayList<Product> retrieveAll() throws Exception;

@@ -17,8 +17,27 @@ public class CRUDProductServiceImpl implements ICRUDProductService{
 	
 	
 	@Override
-	public void create(String title, String description, float price, int quantity) {
-		// TODO Auto-generated method stub
+	public void create(String title, String description,
+			float price, int quantity) throws Exception {
+		if(title == null || description == null || price < 0 || quantity < 0) {
+			throw new Exception("Ievades parametri nav pareizi");
+		}
+		//tāds produkrs jau eksistē
+		if(prodRepo.existsByTitleAndDescriptionAndPrice(title, description, price))
+		{
+			Product existingProduct = 
+					prodRepo.findByTitleAndDescriptionAndPrice(title, description, price);
+			
+			int newQuantity = existingProduct.getQuantity() + quantity;//aprēķinām jauno daudzumu
+			existingProduct.setQuantity(newQuantity);//jauno daudzumu saglabāj javas objektam
+			prodRepo.save(existingProduct);//izsaucās update vaicājums, jo produkts jau eksistē
+		}
+		else
+		{
+			Product newProduct = new Product(title, description, price, quantity);
+			prodRepo.save(newProduct);
+		}
+		
 		
 	}
 
