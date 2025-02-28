@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import lv.venta.model.Product;
 
-public interface ICRUDProduct {
+public interface ICRUDProductService {
 	//visas funkciajs vienmēr būs public un abstract
 	//CRUD - create, retrieve, update, delete
 	
@@ -21,6 +21,6 @@ public interface ICRUDProduct {
 	public abstract void updateById(int id, float price, int quantity) throws Exception;
 	
 	//D - delete
-	public abstract void deletyById(int id) throws Exception;
+	public abstract void deleteById(int id) throws Exception;
 	
 }
