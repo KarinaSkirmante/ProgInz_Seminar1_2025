@@ -35,8 +35,19 @@ public class CRUDProductServiceImpl implements ICRUDProductService{
 
 	@Override
 	public Product retreiveById(int id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		if(id < 0)
+		{
+			throw new Exception("Id nevar būt negatīvs");
+		}
+		
+		if(!prodRepo.existsById(id))
+		{
+			throw new Exception("Produkts ar tādu id neeksistē");
+		}
+		
+		Product retrievedProduct = prodRepo.findById(id).get();
+		return retrievedProduct;
+		
 	}
 
 	@Override
