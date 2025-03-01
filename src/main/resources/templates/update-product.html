@@ -2,33 +2,33 @@
 	
 
 <body>
-	<p> Lūdzu ievadi jaunu produktu!</p>
+	<p> Lūdzu rediģē eksistējošo produktu!</p>
 
-	<form action="#"  th:action="@{/product/crud/update/${__${id}__}}" th:object="${product}" method="post" >
+	<form action="#"  th:action="@{/product/crud/update/__${id}__}" th:object="${product}" method="post" >
 		<table>
 			<tr>
-				<td>Ieraksti produkta nosaukumu:</td>
-				<td> <input type="text"  th:field="*{title}"   /> </td>
+				<td>Rediģē produkta nosaukumu:</td>
+				<td> <input type="text"  th:field="*{title}" disabled="true"  /> </td>
 			</tr>
 			
 			<tr>
-				<td>Ieraksti produkta aprakstu:</td>
-				<td> <input  type="text" th:field="*{description}"  />    </td>
+				<td>Rediģē produkta aprakstu:</td>
+				<td> <input type="text" th:field="*{description}" disabled="true" />    </td>
 			</tr>
 			
 			<tr>
-				<td>Ieraksti produkta cenu:</td>
+				<td>Rediģē produkta cenu:</td>
 				<td> <input  type="text" th:field="*{price}"  />    </td>
 			</tr>
 			
 			<tr>
-				<td>Ieraksti produkta daudzumu:</td>
+				<td>Rediģē produkta daudzumu:</td>
 				<td> <input  type="text" th:field="*{quantity}"  />    </td>
 			</tr>
 
 			<tr>
 				
-				<td> <button type="submit"> Saglabāt </button>     </td>
+				<td> <button type="submit"> Saglabāt rediģēto produktu </button>     </td>
 				
 			</tr>
 			

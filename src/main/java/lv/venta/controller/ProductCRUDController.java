@@ -118,14 +118,24 @@ public class ProductCRUDController {
 	
 	@PostMapping("/update/{id}")
 	public String postControllerUpdateProductById
-	(Product product, @PathVariable(name = "id") int id) {//iegūs jau updeitoto produktu šeit
-		System.out.println(product);
-		return "simple-page";
+	(Product product, @PathVariable(name = "id") int id, Model model) {//iegūs jau updeitoto produktu šeit
+		if(product == null) {
+			model.addAttribute("package", "Nav iegūts aizpildītais produkts");
+			return "show-error-page";//parādīs show-error-page.html ar izmesto kļūdu
+		}
+		try
+		{
+			prodService.updateById(id, product.getPrice(), product.getQuantity());
+			return "redirect:/product/crud/all";
+		}
+		catch (Exception e) {
+			model.addAttribute("package", e.getMessage());
+			return "show-error-page";//parādīs show-error-page.html ar izmesto kļūdu
+		}
+
+		
 	}
-	//izveidot update-product lapu (sākuma nokopēt create-product lapu, bet nomainīt th:action
-	
-	//izveidot postControllieri, kurā saķer updeitoo produktu
-	//izmantojot prodServisu updetot produktu arī datubāzē
+
 	
 	
 	
