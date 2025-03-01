@@ -35,7 +35,7 @@ public class CRUDProductServiceImpl implements ICRUDProductService{
 		else
 		{
 			Product newProduct = new Product(title, description, price, quantity);
-			prodRepo.save(newProduct);
+			prodRepo.save(newProduct);//izsaucās insert vaicājums, kas pievienos jaunu produktu tabulā
 		}
 		
 		
@@ -71,7 +71,17 @@ public class CRUDProductServiceImpl implements ICRUDProductService{
 
 	@Override
 	public void updateById(int id, float price, int quantity) throws Exception {
-		// TODO Auto-generated method stub
+		Product retreivedProduct = retreiveById(id);
+		
+		if(retreivedProduct.getPrice() != price) {
+			retreivedProduct.setPrice(price);//ar set saglabajam jauno vērtību java pusē
+		}
+		
+		if(retreivedProduct.getQuantity() != quantity) {
+			retreivedProduct.setQuantity(quantity);//ar set saglabajam jauno vērtību java pusē
+		}
+		
+		prodRepo.save(retreivedProduct);//saglabajam izmaiņas arī datubāzē (šeit būs update vaicajums, jo produkts eksistē
 		
 	}
 
