@@ -32,12 +32,12 @@ public class Product {
 	
 	@Column(name = "Title")
 	@NotNull
-	@Pattern(regexp = "[A-Z]{1}[a-z ]{3,30}")
+	@Pattern(regexp = "[A-ZĒŪĪĻĶĢŠĀŽČŅ]{1}[a-zēūīļķģšāžčņ ]{3,30}")
 	private String title;
 	
 	
 	@NotNull
-	@Pattern(regexp = "[A-Za-b ,]{5,100}")
+	@Pattern(regexp = "[A-ZĒŪĪĻĶĢŠĀŽČŅa-zēūīļķģšāžčņ ,]{4,100}")
 	//@Size(min = 5, max = 100) <- ja nenorādam regex maska izmeru, tad to var norādīt šādi
 	@Column(name = "Description")
 	private String description;

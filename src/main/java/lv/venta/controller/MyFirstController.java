@@ -15,9 +15,9 @@ public class MyFirstController {
 	
 	
 	private ArrayList<Product> allProducts = new ArrayList<>(Arrays.asList(
-			new Product("Gurķis", "Zaļš", 1.99f, 7),
-			new Product("Arbūzs", "Salds", 5.99f, 2),
-			new Product("Burkāns", "Veselīgs", 0.45f, 5)));
+			new Product("Gurķis", "Zaļš", 0.99f, 7),
+			new Product("Arbūzs", "Salds", 4.88f, 2),
+			new Product("Burkāns", "Veselīgs", 1.15f, 5)));
 	
 	
 	@GetMapping("/simple") //localhost:8080/simple
