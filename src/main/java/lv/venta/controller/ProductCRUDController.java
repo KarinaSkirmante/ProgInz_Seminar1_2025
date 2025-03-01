@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -75,6 +76,57 @@ public class ProductCRUDController {
 		model.addAttribute("product", product);//tiks iedots līdzi tukšs produkts, ko pēc tam aizpildīs frontendā
 		return "create-product";//parādīs create-product.html lapu
 	}
+	
+	
+	@PostMapping("/create")
+	public String postControllerCreateProduct(Product product, Model model) {//iegūsim aizpildīti product orbjektu no html lapas
+		if(product == null) {
+			model.addAttribute("package", "Nav iegūts aizpildītais produkts");
+			return "show-error-page";//parādīs show-error-page.html ar izmesto kļūdu
+		}
+		
+		try
+		{
+			prodService.create(product.getTitle(), product.getDescription(),
+				product.getPrice(), product.getQuantity());
+			return "redirect:/product/crud/all";//pārleks uz /product/crud/all get kontrolieri
+		
+		}
+		catch (Exception e) {
+			model.addAttribute("package", e.getMessage());
+			return "show-error-page";//parādīs show-error-page.html ar izmesto kļūdu
+		}
+
+	}
+	
+	@GetMapping("/update/{id}")//localhost:8080/product/crud/update/2
+	public String getControllerUpdateProductById(@PathVariable(name = "id") int id, Model model)
+	{
+		try
+		{
+			Product foundproduct = prodService.retreiveById(id);
+			model.addAttribute("product", foundproduct);//tiks padots līdzi jau atrastais produkts
+			return "update-product";//parādit update-product.html lapu
+		}
+		catch (Exception e) {
+			model.addAttribute("package", e.getMessage());
+			return "show-error-page";//parādīs show-error-page.html ar izmesto kļūdu
+		}
+	}
+
+	
+	
+	@PostMapping("/update/{id}")
+	public String postControllerUpdateProductById
+	(Product product, @PathVariable(name = "id") int id) {//iegūs jau updeitoto produktu šeit
+		System.out.println(product);
+		return "simple-page";
+	}
+	//izveidot update-product lapu (sākuma nokopēt create-product lapu, bet nomainīt th:action
+	
+	//izveidot postControllieri, kurā saķer updeitoo produktu
+	//izmantojot prodServisu updetot produktu arī datubāzē
+	
 	
 	
 	
