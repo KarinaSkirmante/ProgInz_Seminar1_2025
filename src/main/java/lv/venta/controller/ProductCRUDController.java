@@ -136,7 +136,21 @@ public class ProductCRUDController {
 		
 	}
 
-	
+	@GetMapping("/delete/{id}")//locahost:8080/product/crud/delete/2 
+	public String getControllerDeleteById(@PathVariable(name = "id") int id, Model model) {
+		try
+		{
+			prodService.deleteById(id);
+			model.addAttribute("package", prodService.retrieveAll());
+			return "show-all-product-page";
+		}
+		catch (Exception e) {
+			model.addAttribute("package", e.getMessage());
+			return "show-error-page";//parādīs show-error-page.html ar izmesto kļūdu
+		}
+
+		
+	}
 	
 	
 	
