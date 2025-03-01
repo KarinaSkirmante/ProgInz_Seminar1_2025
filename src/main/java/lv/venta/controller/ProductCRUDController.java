@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -54,8 +55,19 @@ public class ProductCRUDController {
 	
 	
 	//localhost:8080/product/crud/all/2
-	
-	
+	@GetMapping("/all/{id}")
+	public String getControllerGetOnProductById2(@PathVariable(name = "id") int id, Model model) {
+		try
+		{
+			Product oneProduct = prodService.retreiveById(id);
+			model.addAttribute("package", oneProduct);
+			return "show-one-product-page";//parādīs show-one-product-page.html lapu ar jau konkrēto produktu
+		}
+		catch (Exception e) {
+			model.addAttribute("package", e.getMessage());
+			return "show-error-page";//parādīs show-error-page.html ar izmesto kļūdu
+		}
+	}
 	
 	
 	
