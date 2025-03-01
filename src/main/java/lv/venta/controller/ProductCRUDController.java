@@ -69,6 +69,12 @@ public class ProductCRUDController {
 		}
 	}
 	
+	@GetMapping("/create")//localhost:8080/product/crud/create
+	public String getControllerCreateProduct(Model model) {
+		Product product = new Product();
+		model.addAttribute("product", product);//tiks iedots līdzi tukšs produkts, ko pēc tam aizpildīs frontendā
+		return "create-product";//parādīs create-product.html lapu
+	}
 	
 	
 	
