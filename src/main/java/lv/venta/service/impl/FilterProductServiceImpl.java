@@ -34,14 +34,34 @@ public class FilterProductServiceImpl implements IFilterProductService {
 
 	@Override
 	public ArrayList<Product> filterProductsByContainingText(String searchText) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		if(searchText == null || searchText.isEmpty())
+		{
+			throw new Exception("Nepareizi padots meklētais teksts");
+		}
+		
+		
+		ArrayList<Product> filteredProducts = 
+				prodRepo.findByTitleContainingOrDescriptionContaining(searchText, searchText);
+		
+		if(filteredProducts.isEmpty())
+		{
+			throw new Exception(
+					"Veikalā nav neviens produkts, kura nosaukums vai apraksts saturētu " + searchText);
+		}
+		
+		return filteredProducts;
 	}
 
 	@Override
 	public float calculateIncome() throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		float result = prodRepo.calculateSumFromProduct();
+		
+		if(result == 0) {
+			throw new Exception("Cena vai daudzums ir 0 datubāzē");
+		}
+		
+		return result;
 	}
 
 	@Override

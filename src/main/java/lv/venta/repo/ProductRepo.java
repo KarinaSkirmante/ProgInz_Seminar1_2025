@@ -2,6 +2,7 @@ package lv.venta.repo;
 
 import java.util.ArrayList;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import lv.venta.model.Product;
@@ -24,5 +25,13 @@ public interface ProductRepo extends CrudRepository<Product, Integer> {
 	//šeit apakšā izveidosies vaicājums
 	//select * from product where quantity > 6;(ja threshold ir 6)
 	public abstract ArrayList<Product> findByQuantityGreaterThan(int threshold);
+	//šeit apakšā izveidosies vaicājums
+	//select * from product where description like '%abc%' OR title like '%abc%'; (ja searchtext un searchText2 ir abc)
+	public abstract ArrayList<Product> findByTitleContainingOrDescriptionContaining(String searchText,
+			String searchText2);
+
+	//var paši veidot vaicajumus, bet tad jāizmato Quary anotācija
+	@Query(nativeQuery = true, value = "select sum(price * quantity) from product;")
+	public abstract float calculateSumFromProduct();
 
 }
