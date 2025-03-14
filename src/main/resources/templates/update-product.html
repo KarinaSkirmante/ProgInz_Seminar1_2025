@@ -9,21 +9,27 @@
 			<tr>
 				<td>Rediģē produkta nosaukumu:</td>
 				<td> <input type="text"  th:field="*{title}" disabled="true"  /> </td>
+				
 			</tr>
 			
 			<tr>
 				<td>Rediģē produkta aprakstu:</td>
 				<td> <input type="text" th:field="*{description}" disabled="true" />    </td>
+			
 			</tr>
 			
 			<tr>
 				<td>Rediģē produkta cenu:</td>
 				<td> <input  type="text" th:field="*{price}"  />    </td>
+				<td th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></td>
+
 			</tr>
 			
 			<tr>
 				<td>Rediģē produkta daudzumu:</td>
 				<td> <input  type="text" th:field="*{quantity}"  />    </td>
+				<td th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></td>
+
 			</tr>
 
 			<tr>

@@ -70,7 +70,7 @@ public class ProductCRUDController {
 
 	@PostMapping("/create")
 	public String postControllerCreateProduct(@Valid Product product, BindingResult result, Model model) {// iegūsim
-																									// lapas
+		// lapas
 		if (product == null) {
 			model.addAttribute("package", "Nav iegūts aizpildītais produkts");
 			return "show-error-page";// parādīs show-error-page.html ar izmesto kļūdu
@@ -106,23 +106,40 @@ public class ProductCRUDController {
 	}
 
 	@PostMapping("/update/{id}")
-	public String postControllerUpdateProductById(Product product, @PathVariable(name = "id") int id, Model model) {// iegūs
-																													// jau
-																													// updeitoto
-																													// produktu
-																													// šeit
+	public String postControllerUpdateProductById(@Valid Product product, BindingResult result,
+			@PathVariable(name = "id") int id, Model model) {// iegūs
+
 		if (product == null) {
 			model.addAttribute("package", "Nav iegūts aizpildītais produkts");
 			return "show-error-page";// parādīs show-error-page.html ar izmesto kļūdu
 		}
-		try {
-			prodService.updateById(id, product.getPrice(), product.getQuantity());
-			return "redirect:/product/crud/all";
-		} catch (Exception e) {
-			model.addAttribute("package", e.getMessage());
-			return "show-error-page";// parādīs show-error-page.html ar izmesto kļūdu
+
+		if (result.hasErrors()) {
+			try
+			{
+				//TODO salabot, lai title un desription pēc submit pogas arī paliek
+				Product product2 = prodService.retreiveById(id);
+				product.setTitle(product2.getTitle());
+				product.setDescription(product2.getDescription());
+				model.addAttribute("product", product);
+				return "update-product";
+			}
+			catch (Exception e) {
+				model.addAttribute("package", e.getMessage());
+				return "show-error-page";// parādīs show-error-page.html ar izmesto kļūdu
+			}
 		}
 
+		else {
+
+			try {
+				prodService.updateById(id, product.getPrice(), product.getQuantity());
+				return "redirect:/product/crud/all";
+			} catch (Exception e) {
+				model.addAttribute("package", e.getMessage());
+				return "show-error-page";// parādīs show-error-page.html ar izmesto kļūdu
+			}
+		}
 	}
 
 	@GetMapping("/delete/{id}") // locahost:8080/product/crud/delete/2
