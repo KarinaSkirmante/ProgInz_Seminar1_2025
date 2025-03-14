@@ -38,6 +38,51 @@ public class ProductFilterController {
 		}
 	}
 
+	@GetMapping("/quantity/{threshold}")//localhost:8080/product/filter/quantity/4
+	public String getControllerFilterByQuantity(@PathVariable(name = "threshold") int threshold, 
+			Model model) {
+		try
+		{
+			ArrayList<Product> filteredProds = prodService.filterProductsByQuantityLargerThan(threshold);
+			model.addAttribute("package", filteredProds);
+			return "show-all-product-page";//parādīs show-all-product-page.html lapu, kura būs ievietoti izfiltrēti produkti
+		}
+		catch (Exception e) {
+			model.addAttribute("package", e.getMessage());
+			return "show-error-page";//parādīt show-error-page.html lapu, kura būs kļudas ziņojums
+		}
+		
+	}
+	
+	@GetMapping("/search/{text}")//localhost:8080/product/filter/search/al
+	public String 
+	getControllerFilterByTitleOrDescription(@PathVariable(name = "text") String text, Model model ) {
+		try
+		{
+			ArrayList<Product> filteredProds = prodService.filterProductsByContainingText(text);
+			model.addAttribute("package", filteredProds);
+			return "show-all-product-page";//parādīs show-all-product-page.html lapu, kura būs ievietoti izfiltrēti produkti
+		}
+		catch (Exception e) {
+			model.addAttribute("package", e.getMessage());
+			return "show-error-page";//parādīt show-error-page.html lapu, kura būs kļudas ziņojums
+		}
+	}
+	
+	@GetMapping("/income") //localhost:8080/product/filter/income
+	public String getControllerGetIncome(Model model) {
+		try
+		{
+			float income = prodService.calculateIncome();
+			model.addAttribute("package", income + " eur");
+			return "data-page";//parādīt data-page.html lapu ar ienākumu vērtību
+		}
+		catch (Exception e) {
+			model.addAttribute("package", e.getMessage());
+			return "show-error-page";//parādīt show-error-page.html lapu, kura būs kļudas ziņojums
+		}
+		
+	}
 	
 	
 	
